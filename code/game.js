@@ -157,13 +157,8 @@ game.prototype.start_handling = function()
 game.prototype.key_down = function(e)
 {
 	var code = e.keyCode;
-	if(code == 38)
-	{
-		var w = this.screen_width;
-		var h = this.screen_height;
-		this.player = new player({x : w/2, y: 0 , game : this});
-		this.game_objects.push(this.player);
-	}
+	var xc = Math.random() * this.screen_width;
+	this.game_objects.push(new player({x : xc, y: 0 , game : this}));
 }
 
 
