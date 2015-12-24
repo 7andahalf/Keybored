@@ -1,2 +1,2 @@
 # Keybored
-A game that interacts with keys
+A fun way to learn typing

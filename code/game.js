@@ -1,5 +1,5 @@
 var global_game = null;
-
+var file = "a";
 $(function() { 
 	start_game();
 });
@@ -67,7 +67,7 @@ game.prototype.setup = function()
 
 game.prototype.create_box2d_world = function()
 {
-	var gravity = new b2Vec2(0, -10);
+	var gravity = new b2Vec2(0, -3);
 
 	var doSleep = false;
 	var world = new b2World(gravity , doSleep);
@@ -157,8 +157,119 @@ game.prototype.start_handling = function()
 game.prototype.key_down = function(e)
 {
 	var code = e.keyCode;
-	var xc = Math.random() * this.screen_width;
-	this.game_objects.push(new player({x : xc, y: 0 , game : this}));
+	var xc = 0.5;
+	console.log(code);
+	switch(code){
+		case 81:
+			file = "q";
+			xc = 0.1;
+			break;
+		case 87:
+			file = "w";
+			xc = 0.1 + (0.0755555 * 1);
+			break;
+		case 69:
+			file = "e";
+			xc = 0.1 + (0.0755555 * 2);
+			break;
+		case 82:
+			file = "r";
+			xc = 0.1 + (0.0755555 * 3);
+			break;
+		case 84:
+			file = "t";
+			xc = 0.1 + (0.0755555 * 4);
+			break;
+		case 89:
+			file = "y";
+			xc = 0.1 + (0.0755555 * 5);
+			break;
+		case 85:
+			file = "u";
+			xc = 0.1 + (0.0755555 * 6);
+			break;
+		case 73:
+			file = "i";
+			xc = 0.1 + (0.0755555 * 7);
+			break;
+		case 79:
+			file = "o";
+			xc = 0.1 + (0.0755555 * 8);
+			break;
+		case 80:
+			file = "p";
+			xc = 0.78;
+			break;
+		case 65:
+			file = "a";
+			xc = 0.13;
+			break;
+		case 83:
+			file = "s";
+			xc = 0.13 + (0.0755555 * 1);
+			break;
+		case 68:
+			file = "d";
+			xc = 0.13 + (0.0755555 * 2);
+			break;
+		case 70:
+			file = "f";
+			xc = 0.13 + (0.0755555 * 3);
+			break;
+		case 71:
+			file = "g";
+			xc = 0.13 + (0.0755555 * 4);
+			break;
+		case 72:
+			file = "h";
+			xc = 0.13 + (0.0755555 * 5);
+			break;
+		case 74:
+			file = "j";
+			xc = 0.13 + (0.0755555 * 6);
+			break;
+		case 75:
+			file = "k";
+			xc = 0.13 + (0.0755555 * 7);
+			break;
+		case 76:
+			file = "l";
+			xc = 0.13 + (0.0755555 * 8);
+			break;
+		case 90:
+			file = "z";
+			xc = 0.16;
+			break;
+		case 88:
+			file = "x";
+			xc = 0.16 + (0.0755555 * 1);
+			break;
+		case 67:
+			file = "c";
+			xc = 0.16 + (0.0755555 * 2);
+			break;
+		case 86:
+			file = "v";
+			xc = 0.16 + (0.0755555 * 3);
+			break;
+		case 66:
+			file = "b";
+			xc = 0.16 + (0.0755555 * 4);
+			break;
+		case 78:
+			file = "n";
+			xc = 0.16 + (0.0755555 * 5);
+			break;
+		case 77:
+			file = "m";
+			xc = 0.16 + (0.0755555 * 6);
+			break;
+		default:
+			xc = Math.random();
+			file = "circle";
+			break;
+	}
+	this.game_objects.push(new player({x : xc * this.screen_width, y: 0 , game : this, f:file}));
 }
 
 
@@ -173,6 +284,7 @@ function player(options)
 	
 	this.x = options.x;
 	this.y = options.y;
+	this.f = options.f;
 	this.game = options.game;
 	this.age = 0;
 		
@@ -195,7 +307,7 @@ function player(options)
 	this.body = body;
 
 
-	this.add_velocity(new b2Vec2(0,13));
+	this.add_velocity(new b2Vec2(0,7));
 }
 
 player.prototype.tick = function()
@@ -239,7 +351,6 @@ player.prototype.add_velocity = function(vel)
 	b.SetLinearVelocity(v);
 }
 
-player.img = img_res('circle.png');
 
 player.prototype.draw = function()
 {
@@ -259,6 +370,6 @@ player.prototype.draw = function()
 	var height = this.height * scale;
 	
 	this.game.ctx.translate(sx, sy);
-	this.game.ctx.drawImage(player.img , -width / 2, -height / 2, width, height);
+	this.game.ctx.drawImage(img_res(this.f+'.png') , -width / 2, -height / 2, width, height);
 	this.game.ctx.translate(-sx, -sy);
 }
