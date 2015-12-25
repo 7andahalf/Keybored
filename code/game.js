@@ -446,10 +446,11 @@ function player(options)
 	
 	var info = { 
 		'density' : 10 ,
+		'friction' : 0.3,
 		'fixedRotation' : false ,
 		'userData' : this ,
 		'type' : b2Body.b2_dynamicBody ,
-		'restitution' : 0.6 ,
+		'restitution' : 0.6 
 	};
 	
 	var body = create_box(this.game.box2d_world , this.x, this.y, this.width, this.height, info);
@@ -560,10 +561,11 @@ function letter(options)
 	
 	var info = { 
 		'density' : 10 ,
-		'fixedRotation' : true ,
+		'fixedRotation' : false ,
 		'userData' : this ,
 		'type' : b2Body.b2_staticBody,
 		'restitution' : 0.6 ,
+		'friction' : 0.3
 	};
 	
 	var body = create_box(this.game.box2d_world , this.x, this.y, this.width, this.height, info);
