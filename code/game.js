@@ -19,15 +19,7 @@ function start_game()
 }
 
 function delete_letter(){
-	if(global_letter != null){
-		if(global_letter.body == null)
-		{
-			return;
-		}
-		global_letter.body.GetWorld().DestroyBody( global_letter.body );
-		global_letter.body = null;
-		global_letter.dead = true;
-	}
+	global_game.destroy_object(global_letter);
 }
 
 function random_letter()
@@ -39,7 +31,6 @@ function random_letter()
 		}
 	}
 	var code = Math.round(65 + Math.random() * (90 - 65));
-	console.log(code);
 	var xc = 0.5;
 	switch(code){
 		case 81:
@@ -419,13 +410,12 @@ game.prototype.setup_collision_handler = function()
 	{
 		var a = contact.GetFixtureA().GetUserData();
 		var b = contact.GetFixtureB().GetUserData();
-		
-		if(a instanceof player && b instanceof letter)
+		if(a instanceof player && b instanceof letter && a.f == b.f)
 		{
 			delete_letter();
 		}
 		
-		else if(b instanceof player && a instanceof letter)
+		else if(b instanceof player && a instanceof letter && a.f == b.f)
 		{
 			delete_letter();
 		}
