@@ -22,6 +22,7 @@ var b2Vec2 = Box2D.Common.Math.b2Vec2
 	, b2ContactListener = Box2D.Dynamics.b2ContactListener
 	, b2Settings = Box2D.Common.b2Settings
 	, b2Mat22 = Box2D.Common.Math.b2Mat22
+	, b2Math = Box2D.Common.Math.b2Math
 	, b2EdgeChainDef = Box2D.Collision.Shapes.b2EdgeChainDef
 	, b2EdgeShape = Box2D.Collision.Shapes.b2EdgeShape
 	, b2WorldManifold = Box2D.Collision.b2WorldManifold
